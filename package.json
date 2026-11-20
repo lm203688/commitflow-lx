@@ -1,0 +1,96 @@
+{
+  "name": "commitflow-lx",
+  "displayName": "CommitFlow — Batch Commit Orchestrator",
+  "description": "Split your messy working tree into atomic commits. Group by rules, preview diffs, execute in batch.",
+  "version": "1.0.0",
+  "publisher": "LxStudio",
+  "icon": "icon.png",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lm203688/commitflow-lx.git"
+  },
+  "engines": { "vscode": "^1.80.0" },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "git commit",
+    "batch commit",
+    "atomic commit",
+    "working tree",
+    "commit rule",
+    "dev productivity"
+  ],
+  "activationEvents": [
+    "onCommand:commitflow.previewGroups",
+    "onCommand:commitflow.executeBatch",
+    "onView:commitflow-rules",
+    "onView:commitflow-templates"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "commitflow.previewGroups",       "title": "CommitFlow: Preview Split Groups",     "category": "CommitFlow" },
+      { "command": "commitflow.executeBatch",        "title": "CommitFlow: Execute Batch Commits",    "category": "CommitFlow" },
+      { "command": "commitflow.addRule",             "title": "CommitFlow: Add Split Rule",           "category": "CommitFlow" },
+      { "command": "commitflow.editRule",            "title": "CommitFlow: Edit Rule",                "category": "CommitFlow" },
+      { "command": "commitflow.deleteRule",          "title": "CommitFlow: Delete Rule",              "category": "CommitFlow" },
+      { "command": "commitflow.applyTemplate",       "title": "CommitFlow: Apply Template to Group",  "category": "CommitFlow" },
+      { "command": "commitflow.deleteTemplate",      "title": "CommitFlow: Delete Template",          "category": "CommitFlow" },
+      { "command": "commitflow.refreshTree",         "title": "CommitFlow: Refresh Lists",            "category": "CommitFlow" },
+      { "command": "commitflow.upgradeToPro",        "title": "CommitFlow: Upgrade to Pro ($9)",      "category": "CommitFlow" },
+      { "command": "commitflow.activatePro",         "title": "CommitFlow: Activate Pro License",     "category": "CommitFlow" }
+    ],
+    "keybindings": [
+      { "command": "commitflow.previewGroups", "key": "ctrl+alt+c", "when": "editorFocus" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "commitflow", "title": "CommitFlow", "icon": "$(source-control)" }
+      ]
+    },
+    "views": {
+      "commitflow": [
+        { "id": "commitflow-rules",    "name": "Split Rules" },
+        { "id": "commitflow-templates","name": "Commit Templates" }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        { "command": "commitflow.addRule",     "when": "view == commitflow-rules",    "group": "navigation@1" },
+        { "command": "commitflow.previewGroups","when": "view == commitflow-rules",   "group": "navigation@2" },
+        { "command": "commitflow.executeBatch","when": "view == commitflow-rules",    "group": "navigation@3" },
+        { "command": "commitflow.upgradeToPro","when": "view == commitflow-rules",    "group": "navigation@4" }
+      ],
+      "view/item/context": [
+        { "command": "commitflow.editRule",     "when": "view == commitflow-rules && viewItem =~ /rule_/" },
+        { "command": "commitflow.deleteRule",   "when": "view == commitflow-rules && viewItem =~ /rule_/" },
+        { "command": "commitflow.applyTemplate","when": "view == commitflow-templates && viewItem =~ /tpl_/" },
+        { "command": "commitflow.deleteTemplate","when": "view == commitflow-templates && viewItem =~ /tpl_/" }
+      ]
+    },
+    "configuration": {
+      "title": "CommitFlow",
+      "properties": {
+        "commitflow.verifyEndpoint": {
+          "type": "string",
+          "default": "https://snapmark-license.61960005.workers.dev/verify",
+          "description": "License verification endpoint."
+        },
+        "commitflow.buyoutLink": {
+          "type": "string",
+          "default": "https://snapmark-checkout.pages.dev/?priceId=pri_01m7wkvpp105e26qhnj0hpk583",
+          "description": "Paddle checkout link for CommitFlow Pro ($9 one-time)."
+        },
+        "commitflow.maxBatchSize": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of files per batch commit (free) or unlimited (Pro)."
+        }
+      }
+    }
+  },
+  "scripts": {},
+  "dependencies": {}
+}
