@@ -1,6 +1,6 @@
 # CommitFlow — Batch Commit Orchestrator
 
-**Version:** 1.0.0  
+**Version:** 1.0.1  
 **Publisher:** LxStudio  
 **License:** MIT (see LICENSE.md)
 

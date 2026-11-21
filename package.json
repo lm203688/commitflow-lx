@@ -2,7 +2,7 @@
   "name": "commitflow-lx",
   "displayName": "CommitFlow — Batch Commit Orchestrator",
   "description": "Split your messy working tree into atomic commits. Group by rules, preview diffs, execute in batch.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "LxStudio",
   "icon": "icon.png",
   "license": "SEE LICENSE IN LICENSE.md",
@@ -23,6 +23,7 @@
     "dev productivity"
   ],
   "activationEvents": [
+    "onStartupFinished",
     "onCommand:commitflow.previewGroups",
     "onCommand:commitflow.executeBatch",
     "onView:commitflow-rules",
@@ -47,7 +48,7 @@
     ],
     "viewsContainers": {
       "activitybar": [
-        { "id": "commitflow", "title": "CommitFlow", "icon": "$(source-control)" }
+        { "id": "commitflow", "title": "CommitFlow", "icon": "$(git-branch)" }
       ]
     },
     "views": {
