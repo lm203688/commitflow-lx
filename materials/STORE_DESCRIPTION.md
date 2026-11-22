@@ -36,7 +36,7 @@ Unlock additional capabilities:
 ### Technical details
 - Git operations use Node.js `child_process.execFile` — arguments passed as arrays, never concatenated strings.
 - Every argument beyond the subcommand is scanned for shell metacharacters (`; & | $ \` () {} < >`) and rejected if found.
-- Rules and templates stored locally in VS Code `globalState`; license verified via `snapmark-license.61960005.workers.dev/verify`.
+- Rules and templates stored locally in VS Code `globalState`; license verified via `snapmark-license.463102527.workers.dev/verify`.
 
 ### Who is this for?
 Developers who work on multiple loosely-coupled changes simultaneously and want each logical unit committed separately without manual `git add` churn.

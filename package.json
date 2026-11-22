@@ -2,9 +2,14 @@
   "name": "commitflow-lx",
   "displayName": "CommitFlow — Batch Commit Orchestrator",
   "description": "Split your messy working tree into atomic commits. Group by rules, preview diffs, execute in batch.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "LxStudio",
   "icon": "icon.png",
+  "screenshots": [
+    { "path": "./assets/screenshots/screenshot-01-rule-editor.png",   "markDownName": "Rule Editor.md" },
+    { "path": "./assets/screenshots/screenshot-02-commit-preview.png","markDownName": "Commit Preview.md" },
+    { "path": "./assets/screenshots/screenshot-03-batch-result.png",  "markDownName": "Batch Result.md" }
+  ],
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
@@ -23,7 +28,6 @@
     "dev productivity"
   ],
   "activationEvents": [
-    "onStartupFinished",
     "onCommand:commitflow.previewGroups",
     "onCommand:commitflow.executeBatch",
     "onView:commitflow-rules",
@@ -76,7 +80,7 @@
       "properties": {
         "commitflow.verifyEndpoint": {
           "type": "string",
-          "default": "https://snapmark-license.61960005.workers.dev/verify",
+          "default": "https://snapmark-license.463102527.workers.dev/verify",
           "description": "License verification endpoint."
         },
         "commitflow.buyoutLink": {

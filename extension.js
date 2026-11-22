@@ -17,7 +17,7 @@ function getGitRoot() {
 function readCfg() {
   const c = vscode.workspace.getConfiguration('commitflow');
   return {
-    verifyEndpoint: (c.get('verifyEndpoint') || '').trim() || 'https://snapmark-license.61960005.workers.dev/verify',
+    verifyEndpoint: (c.get('verifyEndpoint') || '').trim() || 'https://snapmark-license.463102527.workers.dev/verify',
     buyoutLink:     (c.get('buyoutLink') || '').trim(),
   };
 }
@@ -155,8 +155,7 @@ function registerCommands(context) {
     );
     if (confirm !== 'Execute') return;
     const result = await ruleEngine.executeBatch(context, gitRoot, groups);
-    const lines = result.results.map(r => r.ok ? `  ✓ ${r.group}: committed` : `  ✗ ${r.group}: ${r.error || 'failed'}`);
-    vscode.window.showInformationMessage('CommitFlow: batch complete.\n' + lines.join('\n'));
+    vscode.window.showInformationMessage(await formatBatchReport(gitRoot, groups, result));
     ruleTree.refresh();
   }));
 
@@ -207,6 +206,36 @@ function registerCommands(context) {
       vscode.window.showErrorMessage(`CommitFlow: ${result.error || 'Invalid license key.'}`);
     }
   }));
+}
+
+// ── Batch report ─────────────────────────────────────────────────────────────
+
+// VS Code notification pills clip multi-line message bodies, so the batch report is
+// rendered as one line: "<group> <short hash>" per group. The hash is read back from git
+// (the commit that last touched the group's files) rather than parsed out of `git commit`
+// output, whose first line carries the branch and author instead.
+async function groupShortHash(gitRoot, filePath) {
+  try {
+    const r = await gitExec.safeGit(gitRoot, ['log', '-1', '--format=%h', '--', filePath]);
+    return (r.stdout || '').trim();
+  } catch (_) { return ''; }
+}
+
+async function formatBatchReport(gitRoot, groups, result) {
+  const parts = [];
+  let ok = 0;
+  for (let i = 0; i < groups.length; i++) {
+    const g = groups[i];
+    const r = (result.results || [])[i];
+    if (r && r.ok !== false && g.files && g.files.length) {
+      ok++;
+      const hash = await groupShortHash(gitRoot, g.files[0].path);
+      parts.push(`${g.ruleName} ${hash}`.trim());
+    } else {
+      parts.push(`${g.ruleName} FAILED`);
+    }
+  }
+  return `CommitFlow: batch complete ${ok}/${groups.length} — ${parts.join(' · ')}`;
 }
 
 // ── Lifecycle ─────────────────────────────────────────────────────────────────
