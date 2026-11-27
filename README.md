@@ -26,6 +26,10 @@ Unlock additional capabilities:
 - [Phase 2 - Upcoming] Conflict pre-check before batch commit.
 - [Phase 2 - Upcoming] One-click revert queue (undo last N commits safely).
 
+**How to buy:** Click **CommitFlow: Upgrade to Pro ($9)** — the secure Paddle checkout opens automatically. Your license activates instantly after payment.
+
+[Buy CommitFlow Pro — $9 one-time](https://snapmark-t3-checkout.pages.dev/pay?priceId=pri_01m7wkvpp105e26qhnj0hpk583)
+
 ## Quick start
 
 1. Open the **CommitFlow** panel from the activity bar (source-control icon).

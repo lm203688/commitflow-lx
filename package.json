@@ -2,7 +2,7 @@
   "name": "commitflow-lx",
   "displayName": "CommitFlow — Batch Commit Orchestrator",
   "description": "Split your messy working tree into atomic commits. Group by rules, preview diffs, execute in batch.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "LxStudio",
   "icon": "icon.png",
   "screenshots": [
@@ -85,7 +85,7 @@
         },
         "commitflow.buyoutLink": {
           "type": "string",
-          "default": "https://snapmark-checkout.pages.dev/?priceId=pri_01m7wkvpp105e26qhnj0hpk583",
+          "default": "https://snapmark-t3-checkout.pages.dev/pay?priceId=pri_01m7wkvpp105e26qhnj0hpk583",
           "description": "Paddle checkout link for CommitFlow Pro ($9 one-time)."
         },
         "commitflow.maxBatchSize": {
